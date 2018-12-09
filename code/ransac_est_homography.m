@@ -18,22 +18,18 @@ N = size(y1, 1);
 best = 0;
 iterations = 1000;
 
-for i=1 : iterations
-  %obtem 4 pontos aletorios
-  r = randsample(N, 4);
-  %estima uma homografia passando os pontos aleatorios
-  Homo = est_homography(x1(r), y1(r), x2(r), y2(r));
-  %aplica a homografia e armazena o resultado
-  [X2homo,Y2homo] = apply_homography(Homo, x2, y2);
-  %calcula a diferença das distancias ao quadrado, se for menor que o tresh, armazena no vetor inliers
-  inliers = ((x1 - X2homo).^2 + (y1 - Y2homo).^2) <= thresh;
-  %calcula a soma de quantidade de matches no inlier
-  qtdMatches = sum(inliers);
-  %se a qtd de matches > a melhor quantidade de matches
+for i=1 : iterations 
+  r = randsample(N, 4); #obtendo 4 pontos
+  Homo = est_homography(x1(r), y1(r), x2(r), y2(r));#estimando homografia dos pontos
+  [X2homo,Y2homo] = apply_homography(Homo, x2, y2);#aplica a homografia 
+  inliers = ((x1 - X2homo).^2 + (y1 - Y2homo).^2) <= thresh;#calcula a diferença pelas dst dos pontos
+  qtdMatches = sum(inliers);#soma da quantidade de matches inLayer
+  
+  #se a qtd de matches > a melhor quantidade de matches
   if (qtdMatches > best)
-    %best recebe a quantidade de matches
+    #best recebe a quantidade de matches
     best = qtdMatches;
-    %bestInlier recebe o inlier que possui a maior quantidade de matches
+    #bestInlier recebe o inlier que possui a maior quantidade de matches
     bestInlier = inliers;  
   endif
 endfor

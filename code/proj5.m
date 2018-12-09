@@ -14,6 +14,8 @@ verbose  = true;         % Whether show stitching details
 % dataset = "lab";
 %dataset = "church";
 dataset = "balcony";
+%dataset = "Re-Estrada";
+%dataset = "Re-Sala";
 
 % Path
 p         = mfilename('fullpath');
@@ -48,5 +50,5 @@ imgMosaic = mymosaic(images, randFlag, verbose);
 h = figure(3);
 imshow(imgMosaic); axis image off;
 title('Final Result of Mosaic');
-% fig_save(h, fullfile(outputDir,'Mosaic'), 'png');
+%fig_save(h, fullfile(outputDir,'Mosaic'), 'png');
 imwrite(imgMosaic, fullfile(outputDir,'Mosaic.png'), 'png');
